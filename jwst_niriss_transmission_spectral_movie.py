@@ -4,33 +4,24 @@ from matplotlib.colors import Normalize
 rcParams['figure.dpi'] = 300
 rcParams['savefig.dpi'] = 300
 
-# planet_spec_opt_waves, planet_spec_opt_spec = np.loadtxt('w6_1184_solarC,O_M,H0optical.txt').T
-planet_spec_ir_waves , planet_spec_ir_spec  = np.loadtxt('w6_1184_solarC,O_M,H0IR.txt').T
+planet_spec_ir_waves , planet_spec_ir_spec  = np.loadtxt('example_transmission_spectrum_hot_jupiter_1100K.txt').T
 
 wave_soss_min = 0.6
 wave_soss_max = 2.8
 
-# soss_waves_opt= (planet_spec_opt_waves>wave_soss_min) * (planet_spec_opt_waves<wave_soss_max)
 soss_waves_ir = (planet_spec_ir_waves >wave_soss_min) * (planet_spec_ir_waves <wave_soss_max)
-
-# planet_spec_opt_spec  = planet_spec_opt_spec[ soss_waves_opt]
-# planet_spec_opt_waves = planet_spec_opt_waves[soss_waves_opt]
 
 planet_spec_ir_spec   = planet_spec_ir_spec[  soss_waves_ir ]
 planet_spec_ir_waves  = planet_spec_ir_waves[ soss_waves_ir ]
 
-transpec_min = planet_spec_ir_spec.min() # min(planet_spec_opt_spec.min(), planet_spec_ir_spec.min())
-transpec_max = planet_spec_ir_spec.max() # max(planet_spec_opt_spec.max(), planet_spec_ir_spec.max())
+transpec_min = planet_spec_ir_spec.min()
+transpec_max = planet_spec_ir_spec.max()
 
-colormap = cm.BuPu #get_cmap('hsv')
+colormap = cm.BuPu
 
 # 0.0 works better for this colormap -- change depending on colormap
 # 3.2 works better for this colormap -- change depending on colormap
 norm     = Normalize(0.0, 3.2) 
-
-# ax1 = fig.add_subplot(121)
-# ax2 = fig.add_subplot(122)
-
 
 fig = gcf()
 clf()
@@ -164,8 +155,6 @@ for kw, wave_now in enumerate(waves_use):
     ax1.scatter( 0.25,-0.25, s=1.0e4, lw=0, c='black', alpha=1.0)
     ax1.scatter( 0.25,-0.25, s=2.0e4, lw=0, c='black', alpha=alpha_now)
     
-    # ax2.plot(planet_spec_opt_waves, planet_spec_opt_spec, c='black')
-    # ax2.plot(planet_spec_ir_waves , planet_spec_ir_spec , c='black')
     ax2.lines.pop() if len(ax2.lines) == 2 else None
     
     ax2.axvline(wave_now, color='black')
