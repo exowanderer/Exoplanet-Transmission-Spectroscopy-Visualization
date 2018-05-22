@@ -142,6 +142,9 @@ waves_use = linspace(wave_soss_min, wave_soss_max, npts)
 plot_now  = True
 save_now  = False
 
+print('Plotting movie is set to {}'.format(plot_now))
+print('Saving   movie is set to {}'.format(save_now))
+
 for kw, wave_now in enumerate(waves_use):
     tspec_now = planet_spec_ir_spec[abs(planet_spec_ir_waves - wave_now).argmin()]
     alpha_now = (tspec_now- transpec_min) / (transpec_max - transpec_min)* (0.75 - 0.25) + 0.25
