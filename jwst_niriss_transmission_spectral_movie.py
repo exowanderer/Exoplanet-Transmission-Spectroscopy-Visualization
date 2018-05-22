@@ -139,8 +139,8 @@ ax1.annotate("Planet 'Core'",
 npts      = 1000
 waves_use = linspace(wave_soss_min, wave_soss_max, npts)
 
-plot_now  = False
-save_now  = True
+plot_now  = True
+save_now  = False
 
 for kw, wave_now in enumerate(waves_use):
     tspec_now = planet_spec_ir_spec[abs(planet_spec_ir_waves - wave_now).argmin()]
